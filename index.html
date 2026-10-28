@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Bahasa Inggris Kelas 3 SD - Final Exam</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Fredoka & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            yellow: '#FFD166',
+                            orange: '#FF9F1C',
+                            pink: '#FF4081',
+                            purple: '#7209B7',
+                            blue: '#3A86EF',
+                            lightBlue: '#4CC9F0',
+                            green: '#06D6A0',
+                            navy: '#1E293B',
+                            softBg: '#F0F5FF'
+                        }
+                    },
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F5FF;
+            background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+        .font-kids {
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+        .btn-bounce {
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-bounce:hover {
+            transform: translateY(-3px) scale(1.02);
+        }
+        .btn-bounce:active {
+            transform: translateY(1px) scale(0.98);
+        }
+        .custom-card {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col justify-between selection:bg-brand-yellow selection:text-slate-900">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b-4 border-brand-lightBlue shadow-sm no-print">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-lightBlue flex items-center justify-center text-white text-2xl shadow-md transform -rotate-3">
+                    <i class="fa-solid fa-language"></i>
+                </div>
+                <div>
+                    <h1 class="font-kids text-xl md:text-2xl font-bold text-slate-800 tracking-wide leading-tight">
+                        English Fun <span class="text-brand-blue">Grade 3 SD</span>
+                    </h1>
+                    <p class="text-xs text-slate-500 font-medium">Tes Akhir Semester Bahasa Inggris</p>
+                </div>
+            </div>
+
+            <!-- Identitas Siswa -->
+            <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-2xl border border-slate-200 text-sm">
+                <span class="pl-2 font-kids text-slate-600 font-medium hidden sm:inline"><i class="fa-solid fa-user-graduate text-brand-blue mr-1"></i> Student:</span>
+                <input type="text" id="studentName" placeholder="Ketik Namamu..." class="px-3 py-1.5 rounded-xl border-none focus:ring-2 focus:ring-brand-blue text-sm font-semibold bg-white shadow-inner w-36 sm:w-48">
+            </div>
+        </div>
+
+        <!-- Progress Bar Global -->
+        <div class="w-full bg-slate-200 h-2.5 overflow-hidden">
+            <div id="globalProgressBar" class="bg-gradient-to-r from-brand-lightBlue via-brand-blue to-brand-purple h-full w-0 transition-all duration-300"></div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-5xl mx-auto px-4 py-6 w-full flex-grow">
+
+        <!-- INTRO HERO BANNER -->
+        <section id="welcomeCard" class="bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-600 rounded-3xl p-6 md:p-8 text-white mb-8 shadow-lg relative overflow-hidden no-print">
+            <div class="absolute -right-4 -bottom-6 opacity-20 text-white text-9xl font-bold select-none">
+                ABC
+            </div>
+            <div class="relative z-10 max-w-2xl">
+                <span class="inline-block bg-white/20 backdrop-blur-md text-white font-kids text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-wider font-semibold border border-white/30">
+                    <i class="fa-solid fa-star text-brand-yellow mr-1"></i> Welcome, Young Learner!
+                </span>
+                <h2 class="font-kids text-2xl md:text-4xl font-bold mb-3 leading-tight">
+                    Are You Ready for the English Quiz?
+                </h2>
+                <p class="text-white/90 text-sm md:text-base mb-6 leading-relaxed">
+                    Kuis ini terdiri dari <b>20 Pilihan Ganda</b>, <b>10 Isian Singkat</b>, dan <b>5 Uraian</b>. Kerjakan dengan teliti dan penuh percaya diri!
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#section-pg" class="bg-brand-yellow hover:bg-yellow-400 text-slate-900 font-kids px-5 py-2.5 rounded-xl font-bold text-sm shadow-md transition btn-bounce inline-flex items-center gap-2">
+                        <i class="fa-solid fa-play"></i> Mulai Mengerjakan
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- NAVIGATION TABS -->
+        <div class="flex border-b-2 border-slate-200 mb-6 gap-2 no-print overflow-x-auto pb-1">
+            <button onclick="switchTab('pg')" id="tab-pg" class="tab-btn px-5 py-3 rounded-t-2xl font-kids font-bold text-sm md:text-base transition flex items-center gap-2 border-b-4 border-brand-blue bg-white text-brand-blue shadow-sm">
+                <span class="w-6 h-6 rounded-full bg-brand-blue text-white text-xs flex items-center justify-center">1</span>
+                Pilihan Ganda (20)
+            </button>
+            <button onclick="switchTab('isian')" id="tab-isian" class="tab-btn px-5 py-3 rounded-t-2xl font-kids font-bold text-sm md:text-base text-slate-500 hover:text-slate-800 transition flex items-center gap-2 border-b-4 border-transparent">
+                <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 text-xs flex items-center justify-center">2</span>
+                Isian Singkat (10)
+            </button>
+            <button onclick="switchTab('uraian')" id="tab-uraian" class="tab-btn px-5 py-3 rounded-t-2xl font-kids font-bold text-sm md:text-base text-slate-500 hover:text-slate-800 transition flex items-center gap-2 border-b-4 border-transparent">
+                <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 text-xs flex items-center justify-center">3</span>
+                Soal Uraian (5)
+            </button>
+        </div>
+
+        <!-- FORM CONTAINER -->
+        <form id="quizForm" onsubmit="event.preventDefault(); submitQuiz();">
+            
+            <!-- SECTION 1: PILIHAN GANDA (20 Soal) -->
+            <section id="section-pg" class="tab-content space-y-6">
+                <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-4 flex items-center gap-3 text-blue-900 mb-4">
+                    <i class="fa-solid fa-circle-info text-2xl text-brand-blue"></i>
+                    <div>
+                        <h3 class="font-kids font-bold">Bagian 1: Pilihan Ganda (Multiple Choice)</h3>
+                        <p class="text-xs text-blue-700">Pilihlah satu jawaban yang paling tepat dengan mengklik Opsi A, B, C, atau D.</p>
+                    </div>
+                </div>
+
+                <!-- Soal PG akan di-render melalui JavaScript -->
+                <div id="pgContainer" class="space-y-6"></div>
+
+                <div class="flex justify-end pt-4 no-print">
+                    <button type="button" onclick="switchTab('isian')" class="bg-brand-blue hover:bg-blue-700 text-white font-kids px-6 py-3 rounded-xl font-bold shadow-md transition btn-bounce flex items-center gap-2">
+                        Lanjut ke Isian Singkat <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- SECTION 2: ISIAN SINGKAT (10 Soal) -->
+            <section id="section-isian" class="tab-content hidden space-y-6">
+                <div class="bg-purple-50 border-2 border-purple-200 rounded-2xl p-4 flex items-center gap-3 text-purple-900 mb-4">
+                    <i class="fa-solid fa-pen-to-square text-2xl text-brand-purple"></i>
+                    <div>
+                        <h3 class="font-kids font-bold">Bagian 2: Isian Singkat (Fill in the Blanks)</h3>
+                        <p class="text-xs text-purple-700">Ketikkan kata atau angka dalam bahasa Inggris yang tepat pada kolom yang telah disediakan.</p>
+                    </div>
+                </div>
+
+                <!-- Soal Isian akan di-render melalui JavaScript -->
+                <div id="isianContainer" class="space-y-6"></div>
+
+                <div class="flex justify-between pt-4 no-print">
+                    <button type="button" onclick="switchTab('pg')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-kids px-6 py-3 rounded-xl font-bold transition flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke PG
+                    </button>
+                    <button type="button" onclick="switchTab('uraian')" class="bg-brand-purple hover:bg-purple-800 text-white font-kids px-6 py-3 rounded-xl font-bold shadow-md transition btn-bounce flex items-center gap-2">
+                        Lanjut ke Uraian <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- SECTION 3: URAIAN (5 Soal) -->
+            <section id="section-uraian" class="tab-content hidden space-y-6">
+                <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-4 flex items-center gap-3 text-amber-900 mb-4">
+                    <i class="fa-solid fa-lightbulb text-2xl text-brand-orange"></i>
+                    <div>
+                        <h3 class="font-kids font-bold">Bagian 3: Soal Uraian (Essay)</h3>
+                        <p class="text-xs text-amber-700">Tuliskan jawaban kalimat lengkap atau terjemahan yang sesuai dalam bahasa Inggris/Indonesia.</p>
+                    </div>
+                </div>
+
+                <!-- Soal Uraian akan di-render melalui JavaScript -->
+                <div id="uraianContainer" class="space-y-6"></div>
+
+                <div class="flex justify-between pt-4 no-print">
+                    <button type="button" onclick="switchTab('isian')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-kids px-6 py-3 rounded-xl font-bold transition flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Isian
+                    </button>
+                    <button type="button" onclick="confirmSubmission()" class="bg-gradient-to-r from-brand-green to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-kids px-8 py-3.5 rounded-xl font-bold shadow-lg transition btn-bounce flex items-center gap-2 text-lg">
+                        <i class="fa-solid fa-paper-plane"></i> Kumpul & Periksa Jawaban
+                    </button>
+                </div>
+            </section>
+
+        </form>
+
+        <!-- REKAP HASIL & EVALUASI -->
+        <section id="resultSection" class="hidden space-y-8 mt-8">
+            <!-- HEADER HASIL -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 border-4 border-brand-yellow custom-card text-center relative overflow-hidden">
+                <div id="badgeContainer" class="inline-block p-4 rounded-full bg-yellow-100 text-brand-orange mb-3 text-4xl">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h2 id="resultTitle" class="font-kids text-3xl font-bold text-slate-800 mb-1">Great Job!</h2>
+                <p id="resultSubtitle" class="text-slate-600 font-medium mb-6">Kamu telah menyelesaikan Tes Akhir Semester Bahasa Inggris.</p>
+
+                <!-- SCORE BOARD -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-xl mx-auto mb-6">
+                    <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl">
+                        <span class="block text-xs text-blue-600 font-bold uppercase tracking-wider">Nilai PG (60%)</span>
+                        <span id="scorePG" class="font-kids text-3xl font-bold text-brand-blue">0</span>
+                    </div>
+                    <div class="bg-purple-50 border border-purple-200 p-4 rounded-2xl">
+                        <span class="block text-xs text-purple-600 font-bold uppercase tracking-wider">Nilai Isian (40%)</span>
+                        <span id="scoreIsian" class="font-kids text-3xl font-bold text-brand-purple">0</span>
+                    </div>
+                    <div class="bg-emerald-50 border-2 border-brand-green p-4 rounded-2xl">
+                        <span class="block text-xs text-emerald-700 font-bold uppercase tracking-wider">Total Skor</span>
+                        <span id="scoreTotal" class="font-kids text-4xl font-bold text-brand-green">0</span>
+                    </div>
+                </div>
+
+                <!-- MOTIVATION MESSAGE -->
+                <div id="motivationBox" class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-700 text-sm font-medium mb-6 max-w-xl mx-auto">
+                    <!-- Ditentukan via JS -->
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div class="flex flex-wrap justify-center gap-4 no-print">
+                    <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-900 text-white font-kids px-6 py-2.5 rounded-xl font-semibold shadow transition btn-bounce inline-flex items-center gap-2">
+                        <i class="fa-solid fa-print"></i> Cetak Hasil
+                    </button>
+                    <button onclick="resetQuiz()" class="bg-brand-orange hover:bg-orange-600 text-white font-kids px-6 py-2.5 rounded-xl font-semibold shadow transition btn-bounce inline-flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> Ulangi Kuis
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-slate-100 p-4 rounded-2xl text-center no-print">
+                <p class="font-kids text-slate-700 font-bold mb-1">
+                    <i class="fa-solid fa-magnifying-glass-chart text-brand-blue mr-1"></i> Discussion & Key Answers
+                </p>
+                <p class="text-xs text-slate-500">Gulir ke bawah untuk melihat kunci jawaban dan pembahasan lengkap setiap nomor.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500 no-print">
+        <div class="max-w-5xl mx-auto px-4">
+            <p class="font-kids text-slate-600 font-bold mb-1">English Semester Final Test - Grade 3 Elementary School</p>
+            <p>Disusun sesuai Kurikulum Bahasa Inggris Kelas 3 SD | Ceria, Interaktif, dan Edukatif</p>
+        </div>
+    </footer>
+
+    <!-- MODAL CONFIRMATION -->
+    <div id="confirmModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4 no-print">
+        <div class="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl border-4 border-brand-yellow text-center transform transition-all">
+            <div class="w-16 h-16 bg-yellow-100 text-brand-orange rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                <i class="fa-solid fa-circle-question"></i>
+            </div>
+            <h3 class="font-kids text-2xl font-bold text-slate-800 mb-2">Finish & Submit?</h3>
+            <p class="text-slate-600 text-sm mb-6">Pastikan kamu sudah memeriksa semua jawaban Pilihan Ganda, Isian, dan Uraian ya!</p>
+            <div class="flex gap-3 justify-center">
+                <button onclick="closeModal()" class="px-5 py-2.5 rounded-xl border-2 border-slate-200 text-slate-600 font-kids font-bold hover:bg-slate-100 transition">
+                    Cek Lagi
+                </button>
+                <button onclick="processSubmit()" class="px-6 py-2.5 rounded-xl bg-brand-green text-white font-kids font-bold shadow-md hover:bg-emerald-600 transition btn-bounce">
+                    Submit Now!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* ==========================================
+           DATA SOAL BAHASA INGGRIS KELAS 3 SD
+        ========================================== */
+        
+        // 1. PILIHAN GANDA (20 SOAL)
+        const pgQuestions = [
+            {
+                id: 1,
+                question: "Lani meets her teacher at 07.00 in the morning. She says, 'Good ..., Teacher!'",
+                options: ["A. Morning", "B. Afternoon", "C. Evening", "D. Night"],
+                answer: 0, // A
+                explanation: "Ucapan salam pada pukul 07.00 pagi dalam Bahasa Inggris adalah 'Good morning'."
+            },
+            {
+                id: 2,
+                question: "Beni wants to erase a mistake on his drawing. He needs an ...",
+                options: ["A. Eraser", "B. Ruler", "C. Pencil", "D. Sharpener"],
+                answer: 0, // A
+                explanation: "'Eraser' berarti penghapus yang digunakan untuk menghapus tulisan/gambar."
+            },
+            {
+                id: 3,
+                question: "Look at the number: '25'. In English, it is written as ...",
+                options: ["A. Twenty", "B. Twenty-five", "C. Thirty-five", "D. Fifteen"],
+                answer: 1, // B
+                explanation: "Angka 25 dalam Bahasa Inggris adalah 'Twenty-five'."
+            },
+            {
+                id: 4,
+                question: "My father's brother is my ...",
+                options: ["A. Aunt", "B. Brother", "C. Uncle", "D. Grandfather"],
+                answer: 2, // C
+                explanation: "Saudara laki-laki dari ayah kita disebut paman ('Uncle')."
+            },
+            {
+                id: 5,
+                question: "The color of the leaf is ...",
+                options: ["A. Red", "B. Yellow", "C. Green", "D. Blue"],
+                answer: 2, // C
+                explanation: "Warna daun segar pada umumnya adalah hijau ('Green')."
+            },
+            {
+                id: 6,
+                question: "Which animal can fly in the sky?",
+                options: ["A. Fish", "B. Bird", "C. Rabbit", "D. Cat"],
+                answer: 1, // B
+                explanation: "Hewan yang bisa terbang di udara adalah burung ('Bird')."
+            },
+            {
+                id: 7,
+                question: "We use our ... to listen to music.",
+                options: ["A. Eyes", "B. Nose", "C. Ears", "D. Hands"],
+                answer: 2, // C
+                explanation: "Kita menggunakan telinga ('Ears') untuk mendengarkan musik."
+            },
+            {
+                id: 8,
+                question: "Edo is thirsty. He wants to drink a glass of ...",
+                options: ["A. Water", "B. Rice", "C. Bread", "D. Pizza"],
+                answer: 0, // A
+                explanation: "Saat haus (thirsty), minuman yang tepat adalah air putih ('Water')."
+            },
+            {
+                id: 9,
+                question: "The cat is sleeping ... the chair. (Di atas)",
+                options: ["A. In", "B. On", "C. Under", "D. Behind"],
+                answer: 1, // B
+                explanation: "Kata depan 'On' digunakan untuk menunjukkan posisi 'di atas' permukaan benda."
+            },
+            {
+                id: 10,
+                question: "'Tangan' in English is ...",
+                options: ["A. Foot", "B. Head", "C. Hand", "D. Leg"],
+                answer: 2, // C
+                explanation: "Bahasa Inggris dari kata 'tangan' adalah 'Hand'."
+            },
+            {
+                id: 11,
+                question: "Siti: 'How are you today?' - Dayu: 'I ... fine, thank you.'",
+                options: ["A. Is", "B. Am", "C. Are", "D. Do"],
+                answer: 1, // B
+                explanation: "Subjek 'I' selalu berpasangan dengan to be 'am' -> 'I am fine'."
+            },
+            {
+                id: 12,
+                question: "Arranging numbers: 12, 13, 14, ..., 16. The missing number is ...",
+                options: ["A. Ten", "B. Fifteen", "C. Sixteen", "D. Fourteen"],
+                answer: 1, // B
+                explanation: "Urutan angka setelah 14 adalah 15 ('Fifteen')."
+            },
+            {
+                id: 13,
+                question: "An elephant is a ... animal, but a mouse is small.",
+                options: ["A. Big", "B. Short", "C. Thin", "D. Small"],
+                answer: 0, // A
+                explanation: "Lawan kata dari kecil (small) untuk gajah adalah besar ('Big')."
+            },
+            {
+                id: 14,
+                question: "We eat breakfast in the ...",
+                options: ["A. Night", "B. Afternoon", "C. Morning", "D. Evening"],
+                answer: 2, // C
+                explanation: "Sarapan pagi ('Breakfast') dilakukan pada waktu pagi hari ('Morning')."
+            },
+            {
+                id: 15,
+                question: "My mother cooks food in the ...",
+                options: ["A. Bedroom", "B. Bathroom", "C. Kitchen", "D. Garden"],
+                answer: 2, // C
+                explanation: "Tempat memasak di rumah adalah dapur ('Kitchen')."
+            },
+            {
+                id: 16,
+                question: "What is the English word for 'Kelinci'?",
+                options: ["A. Duck", "B. Rabbit", "C. Sheep", "D. Cow"],
+                answer: 1, // B
+                explanation: "Kelinci dalam Bahasa Inggris dinamakan 'Rabbit'."
+            },
+            {
+                id: 17,
+                question: "Rudi has 10 marbles. Dika gives him 5 more. Now Rudi has ... marbles.",
+                options: ["A. Twelve", "B. Thirteen", "C. Fourteen", "D. Fifteen"],
+                answer: 3, // D
+                explanation: "10 + 5 = 15. Angka 15 dalam Bahasa Inggris adalah 'Fifteen'."
+            },
+            {
+                id: 18,
+                question: "I use my ... to read a book.",
+                options: ["A. Eyes", "B. Mouth", "C. Nose", "D. Legs"],
+                answer: 0, // A
+                explanation: "Mata ('Eyes') digunakan untuk membaca buku."
+            },
+            {
+                id: 19,
+                question: "The opposite of 'Happy' is ...",
+                options: ["A. Good", "B. Sad", "C. Nice", "D. Cool"],
+                answer: 1, // B
+                explanation: "Lawan kata (opposite) dari bahagia ('Happy') adalah sedih ('Sad')."
+            },
+            {
+                id: 20,
+                question: "Teacher: '... your book at page 10!'",
+                options: ["A. Close", "B. Open", "C. Eat", "D. Sleep"],
+                answer: 1, // B
+                explanation: "Instruksi yang tepat untuk membuka halaman buku adalah 'Open your book'."
+            }
+        ];
+
+        // 2. ISIAN SINGKAT (10 SOAL)
+        const isianQuestions = [
+            {
+                id: 1,
+                question: "The color of a ripe banana is ...",
+                keys: ["yellow"],
+                explanation: "Warna pisang matang adalah kuning ('Yellow')."
+            },
+            {
+                id: 2,
+                question: "Ten plus five is ... (Write in English word)",
+                keys: ["fifteen"],
+                explanation: "10 + 5 = 15 ('Fifteen')."
+            },
+            {
+                id: 3,
+                question: "We use a ... to sharp our pencil.",
+                keys: ["sharpener"],
+                explanation: "Alat untuk meraut pensil dinamakan 'Sharpener'."
+            },
+            {
+                id: 4,
+                question: "My father and my mother are my ...",
+                keys: ["parents"],
+                explanation: "Ayah dan ibu disebut sebagai orang tua ('Parents')."
+            },
+            {
+                id: 5,
+                question: "A dog has ... legs.",
+                keys: ["four", "4"],
+                explanation: "Anjing memiliki empat ('Four') kaki."
+            },
+            {
+                id: 6,
+                question: "Translate into Indonesian: 'I love my family' means 'Saya menyukai/mencintai ... saya'.",
+                keys: ["keluarga"],
+                explanation: "'Family' berarti keluarga."
+            },
+            {
+                id: 7,
+                question: "Before going to sleep at night, we say 'Good ...'",
+                keys: ["night"],
+                explanation: "Sebelum tidur malam, kita mengucapkan 'Good night'."
+            },
+            {
+                id: 8,
+                question: "We smell flowers with our ...",
+                keys: ["nose"],
+                explanation: "Kita mencium bau bunga menggunakan hidung ('Nose')."
+            },
+            {
+                id: 9,
+                question: "The English word for 'Makan' is ...",
+                keys: ["eat"],
+                explanation: "Bahasa Inggris dari kata kerja 'Makan' adalah 'Eat'."
+            },
+            {
+                id: 10,
+                question: "An ice cream is cold, but tea is ...",
+                keys: ["hot"],
+                explanation: "Es krim itu dingin (cold), sedangkan teh itu panas ('Hot')."
+            }
+        ];
+
+        // 3. URAIAN (5 SOAL)
+        const uraianQuestions = [
+            {
+                id: 1,
+                question: "Translate this sentence into Indonesian: 'My classroom is clean and big.'",
+                guide: "<b>Terjemahan:</b> 'Ruang kelas saya bersih dan besar.' (atau 'Kelas saya bersih dan luas.')"
+            },
+            {
+                id: 2,
+                question: "Write 3 classroom object words in English! (Contoh: Buku, Pensil, Penggaris)",
+                guide: "<b>Jawaban Contoh:</b> Book (Buku), Pencil (Pensil), Ruler (Penggaris), Bag (Tas), Eraser (Penghapus)."
+            },
+            {
+                id: 3,
+                question: "Arrange these words into a good sentence: [ is / My / doctor / a / father ]",
+                guide: "<b>Kalimat Tepat:</b> 'My father is a doctor.' (Ayah saya adalah seorang dokter)."
+            },
+            {
+                id: 4,
+                question: "Write 3 kinds of animals that live in the water in English!",
+                guide: "<b>Jawaban Contoh:</b> Fish (Ikan), Shark (Hiu), Whale (Paus), Octopus (Gurita), Crab (Kepiting)."
+            },
+            {
+                id: 5,
+                question: "Write a simple greeting sentence when you meet your friend in the morning!",
+                guide: "<b>Jawaban Contoh:</b> 'Good morning, my friend!' atau 'Hello, Good morning!'"
+            }
+        ];
+
+        /* ==========================================
+           RENDER FUNCTIONS
+        ========================================== */
+
+        window.onload = function() {
+            renderPG();
+            renderIsian();
+            renderUraian();
+            updateProgress();
+        };
+
+        // Render Pilihan Ganda
+        function renderPG() {
+            const container = document.getElementById('pgContainer');
+            container.innerHTML = pgQuestions.map((q, idx) => `
+                <div class="bg-white rounded-2xl p-5 border-2 border-slate-100 custom-card hover:border-blue-200 transition" id="card-pg-${q.id}">
+                    <div class="flex items-start gap-3 mb-4">
+                        <span class="w-8 h-8 rounded-xl bg-blue-100 text-brand-blue font-kids font-bold flex items-center justify-center shrink-0">
+                            ${idx + 1}
+                        </span>
+                        <p class="font-semibold text-slate-800 text-base pt-1">${q.question}</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pl-0 sm:pl-11">
+                        ${q.options.map((opt, optIdx) => `
+                            <label class="relative flex items-center p-3 rounded-xl border-2 border-slate-200 cursor-pointer hover:bg-blue-50/50 hover:border-blue-300 transition group">
+                                <input type="radio" name="pg_${q.id}" value="${optIdx}" onchange="updateProgress()" class="w-4 h-4 text-brand-blue focus:ring-brand-blue border-slate-300">
+                                <span class="ml-3 text-sm font-medium text-slate-700 group-hover:text-slate-900">${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+
+                    <!-- Pembahasan (hidden default) -->
+                    <div id="feedback-pg-${q.id}" class="hidden mt-4 ml-0 sm:ml-11 p-4 rounded-xl text-sm border"></div>
+                </div>
+            `).join('');
+        }
+
+        // Render Isian Singkat
+        function renderIsian() {
+            const container = document.getElementById('isianContainer');
+            container.innerHTML = isianQuestions.map((q, idx) => `
+                <div class="bg-white rounded-2xl p-5 border-2 border-slate-100 custom-card hover:border-purple-200 transition" id="card-isian-${q.id}">
+                    <div class="flex items-start gap-3 mb-3">
+                        <span class="w-8 h-8 rounded-xl bg-purple-100 text-brand-purple font-kids font-bold flex items-center justify-center shrink-0">
+                            ${idx + 1}
+                        </span>
+                        <p class="font-semibold text-slate-800 text-base pt-1">${q.question}</p>
+                    </div>
+
+                    <div class="pl-0 sm:pl-11 max-w-md">
+                        <input type="text" id="isian_${q.id}" oninput="updateProgress()" placeholder="Write your answer here..." class="w-full px-4 py-2.5 rounded-xl border-2 border-slate-200 focus:border-brand-purple focus:ring-2 focus:ring-purple-100 font-semibold text-slate-800 text-sm transition">
+                    </div>
+
+                    <!-- Pembahasan (hidden default) -->
+                    <div id="feedback-isian-${q.id}" class="hidden mt-4 ml-0 sm:ml-11 p-4 rounded-xl text-sm border"></div>
+                </div>
+            `).join('');
+        }
+
+        // Render Uraian
+        function renderUraian() {
+            const container = document.getElementById('uraianContainer');
+            container.innerHTML = uraianQuestions.map((q, idx) => `
+                <div class="bg-white rounded-2xl p-5 border-2 border-slate-100 custom-card hover:border-amber-200 transition" id="card-uraian-${q.id}">
+                    <div class="flex items-start gap-3 mb-3">
+                        <span class="w-8 h-8 rounded-xl bg-amber-100 text-brand-orange font-kids font-bold flex items-center justify-center shrink-0">
+                            ${idx + 1}
+                        </span>
+                        <p class="font-semibold text-slate-800 text-base pt-1">${q.question}</p>
+                    </div>
+
+                    <div class="pl-0 sm:pl-11">
+                        <textarea id="uraian_${q.id}" oninput="updateProgress()" rows="3" placeholder="Write your complete answer in English or Indonesian..." class="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-brand-orange focus:ring-2 focus:ring-amber-100 font-medium text-slate-800 text-sm transition"></textarea>
+                    </div>
+
+                    <!-- Kunci Jawaban / Pembahasan Uraian -->
+                    <div id="feedback-uraian-${q.id}" class="hidden mt-4 ml-0 sm:ml-11 p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-sm">
+                        <p class="font-kids font-bold text-brand-orange mb-1"><i class="fa-solid fa-key"></i> Key Answer & Model Solution:</p>
+                        <p class="leading-relaxed">${q.guide}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /* ==========================================
+           TAB NAVIGATION & PROGRESS LOGIC
+        ========================================== */
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-brand-blue', 'bg-white', 'text-brand-blue', 'shadow-sm');
+                btn.classList.add('border-transparent', 'text-slate-500');
+            });
+
+            document.getElementById(`section-${tab}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-${tab}`);
+            activeBtn.classList.remove('border-transparent', 'text-slate-500');
+            activeBtn.classList.add('border-brand-blue', 'bg-white', 'text-brand-blue', 'shadow-sm');
+
+            window.scrollTo({ top: 150, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            let totalQuestions = pgQuestions.length + isianQuestions.length + uraianQuestions.length;
+            let answered = 0;
+
+            // Check PG
+            pgQuestions.forEach(q => {
+                const selected = document.querySelector(`input[name="pg_${q.id}"]:checked`);
+                if(selected) answered++;
+            });
+
+            // Check Isian
+            isianQuestions.forEach(q => {
+                const val = document.getElementById(`isian_${q.id}`)?.value.trim();
+                if(val && val.length > 0) answered++;
+            });
+
+            // Check Uraian
+            uraianQuestions.forEach(q => {
+                const val = document.getElementById(`uraian_${q.id}`)?.value.trim();
+                if(val && val.length > 0) answered++;
+            });
+
+            const percentage = Math.round((answered / totalQuestions) * 100);
+            document.getElementById('globalProgressBar').style.width = percentage + '%';
+        }
+
+        /* ==========================================
+           SUBMISSION & GRADING SYSTEM
+        ========================================== */
+
+        function confirmSubmission() {
+            document.getElementById('confirmModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('confirmModal').classList.add('hidden');
+        }
+
+        function processSubmit() {
+            closeModal();
+
+            let pgCorrect = 0;
+            let isianCorrect = 0;
+
+            // 1. Grade Pilihan Ganda
+            pgQuestions.forEach(q => {
+                const selected = document.querySelector(`input[name="pg_${q.id}"]:checked`);
+                const feedbackEl = document.getElementById(`feedback-pg-${q.id}`);
+                const userAns = selected ? parseInt(selected.value) : -1;
+
+                feedbackEl.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-900', 'bg-rose-50', 'border-rose-200', 'text-rose-900');
+
+                if (userAns === q.answer) {
+                    pgCorrect++;
+                    feedbackEl.classList.add('bg-emerald-50', 'border-emerald-200', 'text-emerald-900');
+                    feedbackEl.innerHTML = `
+                        <p class="font-bold text-emerald-700 flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Correct Answer!</p>
+                        <p class="text-xs mt-1 text-slate-600">${q.explanation}</p>
+                    `;
+                } else {
+                    feedbackEl.classList.add('bg-rose-50', 'border-rose-200', 'text-rose-900');
+                    feedbackEl.innerHTML = `
+                        <p class="font-bold text-rose-700 flex items-center gap-1"><i class="fa-solid fa-circle-xmark"></i> Incorrect Answer</p>
+                        <p class="text-xs mt-1 text-slate-600">Correct Answer: <b>${q.options[q.answer]}</b>. ${q.explanation}</p>
+                    `;
+                }
+            });
+
+            // 2. Grade Isian Singkat
+            isianQuestions.forEach(q => {
+                const inputEl = document.getElementById(`isian_${q.id}`);
+                const feedbackEl = document.getElementById(`feedback-isian-${q.id}`);
+                const userVal = inputEl ? inputEl.value.trim().toLowerCase().replace(/\s+/g, '') : '';
+                
+                const isCorrect = q.keys.some(key => key.toLowerCase().replace(/\s+/g, '') === userVal);
+
+                feedbackEl.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-900', 'bg-rose-50', 'border-rose-200', 'text-rose-900');
+
+                if (isCorrect) {
+                    isianCorrect++;
+                    feedbackEl.classList.add('bg-emerald-50', 'border-emerald-200', 'text-emerald-900');
+                    feedbackEl.innerHTML = `
+                        <p class="font-bold text-emerald-700 flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Excellent!</p>
+                        <p class="text-xs mt-1 text-slate-600">${q.explanation}</p>
+                    `;
+                } else {
+                    feedbackEl.classList.add('bg-rose-50', 'border-rose-200', 'text-rose-900');
+                    feedbackEl.innerHTML = `
+                        <p class="font-bold text-rose-700 flex items-center gap-1"><i class="fa-solid fa-circle-xmark"></i> Needs Improvement</p>
+                        <p class="text-xs mt-1 text-slate-600">Key Answer: <b>${q.keys[0]}</b>. ${q.explanation}</p>
+                    `;
+                }
+            });
+
+            // 3. Show Uraian Answers
+            uraianQuestions.forEach(q => {
+                document.getElementById(`feedback-uraian-${q.id}`).classList.remove('hidden');
+            });
+
+            // Calculate Scores (PG = 60%, Isian = 40%)
+            const scorePGVal = Math.round((pgCorrect / pgQuestions.length) * 100);
+            const scoreIsianVal = Math.round((isianCorrect / isianQuestions.length) * 100);
+            const totalScoreVal = Math.round((scorePGVal * 0.6) + (scoreIsianVal * 0.4));
+
+            // Display Results
+            document.getElementById('scorePG').innerText = scorePGVal;
+            document.getElementById('scoreIsian').innerText = scoreIsianVal;
+            document.getElementById('scoreTotal').innerText = totalScoreVal;
+
+            const titleEl = document.getElementById('resultTitle');
+            const subtitleEl = document.getElementById('resultSubtitle');
+            const badgeEl = document.getElementById('badgeContainer');
+            const motivationEl = document.getElementById('motivationBox');
+
+            const studentName = document.getElementById('studentName').value.trim() || 'Young Star';
+
+            if (totalScoreVal >= 85) {
+                titleEl.innerText = `Awesome, ${studentName}! 🌟`;
+                subtitleEl.innerText = "Kamu menguasai kosakata dan materi Bahasa Inggris dengan sangat hebat!";
+                badgeEl.className = "inline-block p-4 rounded-full bg-yellow-100 text-yellow-500 mb-3 text-5xl";
+                badgeEl.innerHTML = `<i class="fa-solid fa-crown"></i>`;
+                motivationEl.innerHTML = `
+                    <p class="text-emerald-800 font-bold mb-1">🎉 Superb Performance!</p>
+                    <p>Pertahankan prestasi belajarmu! You are a brilliant English learner.</p>
+                `;
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            } else if (totalScoreVal >= 70) {
+                titleEl.innerText = `Good Job, ${studentName}! 👍`;
+                subtitleEl.innerText = "Nilai Bahasa Inggrismu sudah bagus dan memuaskan.";
+                badgeEl.className = "inline-block p-4 rounded-full bg-blue-100 text-brand-blue mb-3 text-5xl";
+                badgeEl.innerHTML = `<i class="fa-solid fa-medal"></i>`;
+                motivationEl.innerHTML = `
+                    <p class="text-blue-800 font-bold mb-1">👏 Keep Going!</p>
+                    <p>Periksa kembali kosakata yang masih keliru agar pengetahuanmu semakin bertambah!</p>
+                `;
+            } else {
+                titleEl.innerText = `Keep Practicing, ${studentName}! 💪`;
+                subtitleEl.innerText = "Jangan menyerah, terus tingkatkan perbendaharaan katamu.";
+                badgeEl.className = "inline-block p-4 rounded-full bg-orange-100 text-brand-orange mb-3 text-5xl";
+                badgeEl.innerHTML = `<i class="fa-solid fa-heart"></i>`;
+                motivationEl.innerHTML = `
+                    <p class="text-orange-800 font-bold mb-1">📚 Don't Give Up!</p>
+                    <p>Pelajari kunci pembahasan di bawah, lalu coba ulangi tes ini lagi ya!</p>
+                `;
+            }
+
+            // Show All Sections to review
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('hidden'));
+            document.getElementById('resultSection').classList.remove('hidden');
+
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // RESET QUIZ
+        function resetQuiz() {
+            if(confirm('Apakah kamu yakin ingin mengulangi kuis dari awal? Semua jawaban akan dikosongkan.')) {
+                document.getElementById('quizForm').reset();
+                document.getElementById('resultSection').classList.add('hidden');
+                
+                pgQuestions.forEach(q => document.getElementById(`feedback-pg-${q.id}`).classList.add('hidden'));
+                isianQuestions.forEach(q => document.getElementById(`feedback-isian-${q.id}`).classList.add('hidden'));
+                uraianQuestions.forEach(q => document.getElementById(`feedback-uraian-${q.id}`).classList.add('hidden'));
+
+                switchTab('pg');
+                updateProgress();
+            }
+        }
+    </script>
+</body>
+</html>
